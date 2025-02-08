@@ -5,18 +5,34 @@ public class PlayerMovement : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public float movSpeed;
     float speedX, speedY;
-    Rigidbody2D rb;
+    public Rigidbody2D rb;
 
-    void Start()
-    {
-        rb = GetComponent<Rigidbody2D>();
-    }
+    private Vector2 moveDirection; 
 
     // Update is called once per frame
     void Update()
     {
-        speedX = Input.GetAxisRaw("Horizontal") * movSpeed;
-        speedY = Input.GetAxisRaw("Vertical") * movSpeed;
-        rb.linearVelocity = new Vector2(speedX, speedY);
+        //Processing Inputs
+        ProcessInputs();
+    }
+
+    void FixedUpdate()
+    {
+        //Physical Calculations 
+        Move();
+
+    }
+
+    void ProcessInputs()
+    {
+        float moveX = Input.GetAxisRaw("Horizontal");
+        float moveY = Input.GetAxisRaw("Vertical");
+
+        moveDirection = new Vector2(moveX, moveY).normalized;
+    }
+
+    void Move()
+    {
+        rb.linearVelocity = new Vector2(moveDirection.x * movSpeed, moveDirection.y * movSpeed);
     }
 }
