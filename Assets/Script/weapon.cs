@@ -1,18 +1,15 @@
 using UnityEngine;
 
-public class weapon : MonoBehaviour
+public class Weapon : MonoBehaviour
 {
-    public GameObject bulletPrefab;
-    public Transform firePoint;
-   
-    public float fireForce= 20f;
+    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    public GameObject bullet;
+    public Transform firepoint;
+    public float fireForce;
 
-
-public void Fire()
+    public void Fire()
     {
-        GameObject bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
-        bullet.GetComponent<Rigidbody2D>().AddForce(firePoint.up * fireForce, ForceMode2D.Impulse);
-
+        GameObject projectile = Instantiate(bullet, firepoint.position, firepoint.rotation);
+        projectile.GetComponent<Rigidbody2D>().AddForce(firepoint.up * fireForce, ForceMode2D.Impulse);
     }
-
 }

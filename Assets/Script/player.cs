@@ -5,7 +5,7 @@ public class player : MonoBehaviour
 {
     public float moveSpeed = 5f;
     public Rigidbody2D rb;
-    public weapon weapon;
+    public Weapon weapon;
   
 
     Vector2 moveDirection;
